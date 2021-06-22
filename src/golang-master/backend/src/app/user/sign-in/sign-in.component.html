@@ -1,0 +1,39 @@
+<div class="hold-transition login-page">
+    <div class="login-box">
+      <div class="login-logo">
+        <a href="/login"><b>Sign In</b></a>
+      </div>
+      <!-- /.login-logo -->
+      <div class="card">
+        <div class="card-body login-card-body">
+          <p class="login-box-msg">Sign in to start your session</p>
+    
+          <form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
+            <div class="input-group mb-3">
+              <input class="form-control form-control-lg" placeholder="Name" name="Email"
+              #Email="ngModel" [(ngModel)]="service.formData.Email"
+              required [class.invalid]="Email.invalid && Email.touched">            
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope"></span>
+                </div>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <input type="password" class="form-control form-control-lg" placeholder="Password" name="Password"
+                #Password="ngModel" [(ngModel)]="service.formData.Password"
+                required [class.invalid]="Password.invalid && Password.touched">
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-4">
+                <button class="btn btn-primary btn-bloc" type="submit" [disabled]="form.invalid">SUBMIT</button>
+            </div>
+          </form>
+        <!-- /.login-card-body -->
+      </div>
+    </div>
+    </div>

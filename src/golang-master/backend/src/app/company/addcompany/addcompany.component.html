@@ -1,0 +1,50 @@
+<div class="content-wrapper" style="min-height: 1199.41px;">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Company</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Company</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-6">
+        <form novalidate autocomplete="off" #form="ngForm" (submit)="onSubmit(form)">
+          <input type="hidden" name="id" [value]="service.formData.id" />
+          <div class="form-group">
+              <label>Name</label>
+              <input class="form-control form-control-lg" placeholder="Name" name="name"
+                  #name="ngModel" [(ngModel)]="service.formData.name"
+                  required [class.invalid]="name.invalid && name.touched">
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select
+              name="status"
+              class="form-control form-control-lg"
+              #status="ngModel" [(ngModel)]="service.formData.status"
+                  required [class.invalid]="name.invalid && name.touched">
+              <option [value]=1>Active</option>
+              <option [value]=2>InActive</option>
+            </select>
+          </div>
+          <div class="form-group">
+              <button class="btn btn-info btn-lg btn-block" type="submit" [disabled]="form.invalid">SUBMIT</button>
+          </div>
+        </form>
+      </div>
+    </div>
+   </div><!-- /.container-fluid -->
+  </section>
+</div>
+
