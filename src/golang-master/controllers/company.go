@@ -119,7 +119,15 @@ func (h *BaseHandlerSqlx) GetCompaniesSqlx(w http.ResponseWriter, r *http.Reques
 	json.NewEncoder(w).Encode(response)
 }
 
-// PostCompaniesSqlx create companies
+
+
+// swagger:route POST /admin/company/ admin addCompany
+// Create a new company
+//
+// responses:
+//  401: CommonError
+//  200: CommonSuccess
+// Create handles POST requests to add new companies
 func (h *BaseHandlerSqlx) PostCompanySqlx(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("sadad")
 	w.Header().Set("content-type", "application/json")

@@ -8,6 +8,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 	"github.com/rs/cors"
+	"github.com/go-openapi/runtime/middleware"
 	"path"
 	"os"
 )
@@ -17,12 +18,27 @@ func main() {
 	if err != nil {
         log.Fatal(err)
     }
+	
 	r := mux.NewRouter()
 	db := config.ConnectDB()
 	dbsqlx := config.ConnectDBSqlx()
 	h := controllers.NewBaseHandler(db)
 	hsqlx := controllers.NewBaseHandlerSqlx(dbsqlx)
+
+	r.Handle("/swagger.yaml", http.FileServer(http.Dir("../")))
+	r.Handle("/backend1", http.FileServer(http.Dir("../backend/dist")))
 	
+	// handler for documentation
+	opts := middleware.SwaggerUIOpts{SpecURL: "/swagger.yaml"}
+	sh := middleware.SwaggerUI(opts, nil)
+	r.Handle("/docs", sh)
+	// opts1 := middleware.RedocOpts{SpecURL: "/swagger.yaml"}
+	// sh1 := middleware.Redoc(opts1, nil)
+	// r.Handle("/docs", sh1)
+	// opts2 := middleware.RapiDocOpts{SpecURL: "/swagger.yaml"}
+	// sh2 := middleware.RapiDoc(opts2, nil)
+	// r.Handle("/docs", sh2)
+
 	user := r.PathPrefix("/admin").Subrouter()
 	user.HandleFunc("/backend", admin).Methods("GET")
 	user.HandleFunc("/login", hsqlx.Login).Methods("POST")
@@ -53,7 +69,7 @@ func main() {
 
 // serves index file
 func admin(w http.ResponseWriter, r*http.Request) {
-    p := path.Dir("backend/src/index.html")
+    p := path.Dir("../backend/src/index.html")
     // set header
     w.Header().Set("Content-type", "text/html")
     http.ServeFile(w, r, p)

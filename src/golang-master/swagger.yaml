@@ -1,0 +1,53 @@
+basePath: /
+consumes:
+- application/json
+host: localhost:5000
+info:
+  version: 0.0.1
+paths:
+  /admin/company/:
+    post:
+      description: Create a new company
+      operationId: addCompany
+      responses:
+        "200":
+          $ref: '#/responses/CommonSuccess'
+        "401":
+          $ref: '#/responses/CommonError'
+      tags:
+      - admin
+produces:
+- application/json
+responses:
+  CommonError:
+    description: ""
+    headers:
+      message:
+        description: |-
+          Message of the error
+          in: string
+        type: string
+      status:
+        description: |-
+          Status of the error
+          in: int64
+        format: int64
+        type: integer
+  CommonSuccess:
+    description: ""
+    headers:
+      message:
+        description: |-
+          Message of the error
+          in: string
+        type: string
+      status:
+        description: |-
+          Status of the error
+          in: int64
+        format: int64
+        type: integer
+schemes:
+- http
+- https
+swagger: "2.0"

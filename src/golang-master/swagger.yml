@@ -1,0 +1,43 @@
+info: {}
+paths:
+  /admin/company/:
+    post:
+      description: Create a new company
+      operationId: createCompany
+      responses:
+        "200":
+          $ref: '#/responses/CommonSuccess'
+        "401":
+          $ref: '#/responses/CommonError'
+      tags:
+      - companies
+responses:
+  CommonError:
+    description: ""
+    headers:
+      message:
+        description: |-
+          Message of the error
+          in: string
+        type: string
+      status:
+        description: |-
+          Status of the error
+          in: int64
+        format: int64
+        type: integer
+  CommonSuccess:
+    description: ""
+    headers:
+      message:
+        description: |-
+          Message of the error
+          in: string
+        type: string
+      status:
+        description: |-
+          Status of the error
+          in: int64
+        format: int64
+        type: integer
+swagger: "2.0"
